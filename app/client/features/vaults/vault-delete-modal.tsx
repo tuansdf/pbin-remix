@@ -40,7 +40,7 @@ export const VaultDeleteModal = ({ id }: Props) => {
       setIsLoading(true);
       setIsError(false);
       const password = await hashPassword(data.password, configsQuery.data?.hash!);
-      const raw = await hashPassword(data.password, generateHashConfigsWithSalt(window.SALT || ""));
+      const raw = await hashPassword(data.password, generateHashConfigsWithSalt(""));
       await deleteVault(id, { password, raw });
       router("/");
     } catch (e) {
