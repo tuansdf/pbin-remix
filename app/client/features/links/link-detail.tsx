@@ -1,6 +1,5 @@
 import { ErrorMessage } from "@/client/components/error";
 import { ScreenLoading } from "@/client/components/screen-loading";
-import { useDisclosure } from "@/client/hooks/use-disclosure";
 import { useAppStore } from "@/client/stores/app.store";
 import fclasses from "@/client/styles/form.module.scss";
 import { decryptVaultFormSchema } from "@/server/features/vault/vault.schema";
@@ -62,7 +61,6 @@ export const LinkDetail = ({ item }: Props) => {
   const { passwords, addPassword, addShortUrl } = useAppStore();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const [isPasswordOpen, { open: openPasswordModal }] = useDisclosure(false);
   const {
     handleSubmit,
     register,
@@ -85,11 +83,8 @@ export const LinkDetail = ({ item }: Props) => {
       setOriginalLink(result.url);
       return;
     }
-    if (result.status === "fail") {
-      openPasswordModal();
-    }
     setIsLoading(false);
-  }, [item.content, passwords, openPasswordModal, item.configs?.encryption]);
+  }, [item.content, passwords, item.configs?.encryption]);
 
   const handleFormSubmit: SubmitHandler<DecryptVaultFormValues> = async (data) => {
     setIsError(false);
@@ -112,7 +107,6 @@ export const LinkDetail = ({ item }: Props) => {
     }
     if (hashedResult.status === "fail") {
       setIsError(true);
-      openPasswordModal();
     }
     setIsLoading(false);
   };
@@ -121,12 +115,10 @@ export const LinkDetail = ({ item }: Props) => {
     autoDecryptContent();
   }, [autoDecryptContent]);
 
-  if (isLoading) return <ScreenLoading isLoading={isLoading && !originalLink} />;
+  if (isLoading && !originalLink) return <ScreenLoading isLoading={true} />;
 
   return (
     <>
-      {isError && !isPasswordOpen && <ErrorMessage mt="md" />}
-
       <Card
         shadow="sm"
         padding="lg"
