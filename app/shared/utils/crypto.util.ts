@@ -10,30 +10,22 @@ import {
   ID_ALPHABET,
 } from "@/shared/constants/common.constant";
 import { xchacha20poly1305 } from "@noble/ciphers/chacha";
-import {
-  bytesToHex,
-  bytesToUtf8,
-  hexToBytes,
-  utf8ToBytes,
-} from "@noble/ciphers/utils";
+import { bytesToHex, hexToBytes, utf8ToBytes } from "@noble/ciphers/utils";
 import { randomBytes } from "@noble/ciphers/webcrypto";
 import { pbkdf2Async } from "@noble/hashes/pbkdf2";
 import { sha256 } from "@noble/hashes/sha2";
 import { base64 } from "@scure/base";
 import { customAlphabet } from "nanoid";
+import Pako from "pako";
 
-export const encryptText = async (
-  contentStr: string,
-  passwordHex: string,
-  nonceHex: string
-): Promise<string> => {
+export const encryptText = async (contentStr: string, passwordHex: string, nonceHex: string): Promise<string> => {
   const start = performance.now();
   try {
     const nonce = hexToBytes(nonceHex);
     const password = hexToBytes(passwordHex);
     const cipher = xchacha20poly1305(password, nonce);
-    const content = utf8ToBytes(contentStr);
-    const encrypted = cipher.encrypt(content);
+    let content = Pako.deflate(contentStr);
+    let encrypted = cipher.encrypt(content);
     return base64.encode(encrypted);
   } catch (e) {
     return "";
@@ -42,19 +34,14 @@ export const encryptText = async (
   }
 };
 
-export const decryptText = async (
-  content64: string,
-  passwordHex: string,
-  nonceHex: string
-): Promise<string> => {
+export const decryptText = async (content64: string, passwordHex: string, nonceHex: string): Promise<string> => {
   const start = performance.now();
   try {
     const content = base64.decode(content64);
     const password = hexToBytes(passwordHex);
     const nonce = hexToBytes(nonceHex);
     const cipher = xchacha20poly1305(password, nonce);
-    const decrypted = cipher.decrypt(content);
-    return bytesToUtf8(decrypted);
+    return Pako.inflate(cipher.decrypt(content), { to: "string" });
   } catch (e) {
     return "";
   } finally {
@@ -92,22 +79,14 @@ export const generateHashConfigs = (): HashConfigs => {
   return { keySize, iterations, salt, hasher };
 };
 
-export const hashPassword = async (
-  passwordStr: string,
-  configs: HashConfigs
-): Promise<string> => {
+export const hashPassword = async (passwordStr: string, configs: HashConfigs): Promise<string> => {
   const start = performance.now();
   try {
     await new Promise((r) => setTimeout(r, 100));
-    const hashed = await pbkdf2Async(
-      sha256,
-      utf8ToBytes(passwordStr),
-      hexToBytes(String(configs.salt)),
-      {
-        c: Number(configs.iterations),
-        dkLen: Number(configs.keySize),
-      }
-    );
+    const hashed = await pbkdf2Async(sha256, utf8ToBytes(passwordStr), hexToBytes(String(configs.salt)), {
+      c: Number(configs.iterations),
+      dkLen: Number(configs.keySize),
+    });
     return bytesToHex(hashed);
   } catch {
     return passwordStr;

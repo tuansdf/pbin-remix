@@ -8,7 +8,7 @@ export const VaultTable = sqliteTable(
     publicId: text("public_id", { mode: "text", length: 128 })
       .unique()
       .$defaultFn(() => generateId()),
-    content: text("content", { mode: "text", length: 15000 }),
+    content: text("content", { mode: "text", length: 10000 }),
     masterPassword: text("master_password", { mode: "text", length: 128 }),
     guestPassword: text("guest_password", { mode: "text", length: 128 }),
     configs: text("configs", { mode: "text", length: 512 }),
@@ -16,5 +16,5 @@ export const VaultTable = sqliteTable(
   },
   (table) => ({
     expiresAtIdx: index("vault_expires_at_idx").on(table.expiresAt),
-  }),
+  })
 );

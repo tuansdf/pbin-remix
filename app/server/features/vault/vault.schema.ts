@@ -11,7 +11,7 @@ import {
 import { passwordSchema, stringOrUndefined } from "@/shared/schemas/common.schema";
 import { z } from "zod";
 
-const MAX_CONTENT_SERVER = 15000;
+const MAX_CONTENT_SERVER = 10000;
 const MAX_CONTENT_CLIENT = 10000;
 
 const passwordConfigsSchema: z.ZodType<HashConfigs> = z.object(
@@ -44,7 +44,7 @@ const passwordConfigsSchema: z.ZodType<HashConfigs> = z.object(
   {
     required_error: "Password configs is required",
     invalid_type_error: "Invalid password configs",
-  },
+  }
 );
 
 const encryptionConfigsSchema: z.ZodType<EncryptionConfigs> = z.object(
@@ -59,7 +59,7 @@ const encryptionConfigsSchema: z.ZodType<EncryptionConfigs> = z.object(
   {
     required_error: "Encryption configs is required",
     invalid_type_error: "Invalid encryption configs",
-  },
+  }
 );
 
 const vaultConfigsSchema: z.ZodType<VaultConfigs> = z.object(
@@ -67,7 +67,7 @@ const vaultConfigsSchema: z.ZodType<VaultConfigs> = z.object(
     hash: passwordConfigsSchema,
     encryption: encryptionConfigsSchema,
   },
-  { required_error: "Configs is required", invalid_type_error: "Invalid configs" },
+  { required_error: "Configs is required", invalid_type_error: "Invalid configs" }
 );
 
 const idSchema = z
