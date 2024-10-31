@@ -19,7 +19,7 @@ export default function Page() {
   return (
     <>
       {!!item ? (
-        <Box className={classes["container"]}>
+        <Box className={classes["container"]} bg="dark">
           <LinkDetail item={item} />
         </Box>
       ) : (

@@ -1,4 +1,4 @@
-import { LoadingOverlay } from "@mantine/core";
+import { Box, LoadingOverlay } from "@mantine/core";
 import classes from "./screen-loading.module.scss";
 
 type Props = {
@@ -10,9 +10,12 @@ export const ScreenLoading = ({ isLoading = true }: Props) => {
 
   return (
     <>
-      <div className={classes["container"]}>
-        <LoadingOverlay visible={isLoading} />
-      </div>
+      <Box className={classes["container"]}>
+        <LoadingOverlay
+          visible={isLoading}
+          styles={{ overlay: { backgroundColor: "rgba(0,0,0,0.2)", backdropFilter: "blur(2px)" } }}
+        />
+      </Box>
     </>
   );
 };

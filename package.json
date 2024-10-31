@@ -67,5 +67,13 @@
   },
   "engines": {
     "node": ">=20.0.0"
+  },
+  "browserslist": {
+    "production": [
+      "since 2020"
+    ],
+    "development": [
+      "since 2020"
+    ]
   }
 }

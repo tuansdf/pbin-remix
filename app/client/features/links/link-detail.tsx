@@ -121,6 +121,8 @@ export const LinkDetail = ({ item }: Props) => {
     autoDecryptContent();
   }, [autoDecryptContent]);
 
+  if (isLoading) return <ScreenLoading isLoading={isLoading && !originalLink} />;
+
   return (
     <>
       {isError && !isPasswordOpen && <ErrorMessage mt="md" />}
@@ -133,7 +135,7 @@ export const LinkDetail = ({ item }: Props) => {
         component="form"
         onSubmit={handleSubmit(handleFormSubmit)}
         className={fclasses["form"]}
-        maw="30rem"
+        maw="28rem"
         mb="md"
         style={{
           width: "100%",
@@ -169,8 +171,6 @@ export const LinkDetail = ({ item }: Props) => {
           </>
         )}
       </Card>
-
-      <ScreenLoading isLoading={isLoading && !originalLink} />
     </>
   );
 };
