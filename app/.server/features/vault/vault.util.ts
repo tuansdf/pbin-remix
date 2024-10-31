@@ -1,6 +1,6 @@
-import { ENV } from "@/server/constants/env.constant";
-import { vaultRepository } from "@/server/features/vault/vault.repository";
-import { HashConfigs } from "@/server/features/vault/vault.type";
+import { ENV } from "@/.server/constants/env.constant";
+import { vaultRepository } from "@/.server/features/vault/vault.repository";
+import { HashConfigs } from "@/.server/features/vault/vault.type";
 import {
   DEFAULT_HASHER,
   DEFAULT_ITERATIONS,

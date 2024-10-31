@@ -1,4 +1,4 @@
-import { vaultService } from "@/server/features/vault/vault.service";
+import { vaultService } from "@/.server/features/vault/vault.service";
 import { exceptionUtils } from "@/shared/exceptions/exception.util";
 import { json, LoaderFunctionArgs } from "@remix-run/node";
 

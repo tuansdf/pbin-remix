@@ -1,4 +1,4 @@
-import { HashConfigs } from "@/server/features/vault/vault.type";
+import { HashConfigs } from "@/.server/features/vault/vault.type";
 import {
   DEFAULT_HASHER,
   DEFAULT_ITERATIONS,

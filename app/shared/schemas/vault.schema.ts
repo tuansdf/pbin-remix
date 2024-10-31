@@ -7,7 +7,7 @@ import {
   EncryptionConfigs,
   HashConfigs,
   VaultConfigs,
-} from "@/server/features/vault/vault.type";
+} from "@/.server/features/vault/vault.type";
 import { passwordSchema, stringOrUndefined } from "@/shared/schemas/common.schema";
 import { z } from "zod";
 

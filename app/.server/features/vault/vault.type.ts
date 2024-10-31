@@ -1,4 +1,4 @@
-import { VaultTable } from "@/server/entities/vault.entity";
+import { VaultTable } from "@/.server/entities/vault.entity";
 
 export type Vault = typeof VaultTable.$inferSelect;
 export type VaultCreate = typeof VaultTable.$inferInsert;

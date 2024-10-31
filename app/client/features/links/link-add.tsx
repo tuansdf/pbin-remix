@@ -10,8 +10,8 @@ import {
   VAULT_EXPIRE_1_MONTH,
   VAULT_EXPIRE_1_WEEK,
 } from "@/shared/constants/common.constant";
-import { createLinkFormSchema } from "@/server/features/vault/vault.schema";
-import { CreateVaultFormValues } from "@/server/features/vault/vault.type";
+import { createLinkFormSchema } from "@/shared/schemas/vault.schema";
+import { CreateVaultFormValues } from "@/.server/features/vault/vault.type";
 import {
   encryptText,
   generateEncryptionConfigs,

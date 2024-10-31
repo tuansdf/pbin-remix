@@ -1,6 +1,6 @@
-import { ENV } from "@/server/constants/env.constant";
-import { vaultRepository } from "@/server/features/vault/vault.repository";
-import { CreateVaultRequest, DeleteVaultRequest, VaultConfigs } from "@/server/features/vault/vault.type";
+import { ENV } from "@/.server/constants/env.constant";
+import { vaultRepository } from "@/.server/features/vault/vault.repository";
+import { CreateVaultRequest, DeleteVaultRequest, VaultConfigs } from "@/.server/features/vault/vault.type";
 import {
   generateFakeContent,
   generateFakeEncryptionConfigs,
@@ -8,7 +8,7 @@ import {
   getVaultExpiredTime,
   getVaultIdSize,
   handleVaultPublicIdCollision,
-} from "@/server/features/vault/vault.util";
+} from "@/.server/features/vault/vault.util";
 import { DEFAULT_LINK_ID_SIZE } from "@/shared/constants/common.constant";
 import { CustomException } from "@/shared/exceptions/custom-exception";
 import { createHash, createHashSync, generateId, hashPassword } from "@/shared/utils/crypto.util";

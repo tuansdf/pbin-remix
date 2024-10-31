@@ -4,7 +4,7 @@ import {
   CreateVaultResponse,
   DeleteVaultRequest,
   VaultConfigs,
-} from "@/server/features/vault/vault.type";
+} from "@/.server/features/vault/vault.type";
 
 export const createVault = async (data: CreateVaultRequest, type: number) => {
   const response = await mainApiInstance.post<CreateVaultResponse>(`/api/vaults?type=${type}`, data);

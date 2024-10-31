@@ -1,8 +1,8 @@
 import { createVault } from "@/client/api/vault.api";
 import { ScreenLoading } from "@/client/components/screen-loading";
 import { useAppStore } from "@/client/stores/app.store";
-import { createNoteFormSchema } from "@/server/features/vault/vault.schema";
-import { CreateVaultFormValues } from "@/server/features/vault/vault.type";
+import { createNoteFormSchema } from "@/shared/schemas/vault.schema";
+import { CreateVaultFormValues } from "@/.server/features/vault/vault.type";
 import {
   DEFAULT_NOTE_ID_SIZE,
   VAULT_EXPIRE_1_DAY,
